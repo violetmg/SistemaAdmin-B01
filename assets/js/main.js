@@ -1,3 +1,7 @@
+//Tooltip Initializer
+const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+
 //Login function
 function handleLogin(event) {
   event.preventDefault();
@@ -52,3 +56,7 @@ function exportarDatos() {
 
   // Actualizar datos cada 5 minutos
   setInterval(actualizarDatos, 300000);
+
+
+  // ... Modals Logic ... //
+

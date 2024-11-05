@@ -71,52 +71,71 @@
       </thead>
       <tbody id="carrito"></tbody>
     </table>
-    <h4>Total: $<span id="total">0</span></h4>
-    <button class="btn btn-dark" onclick="window.print()">Imprimir</button>
-  </div>
-
-  <!-- Edit Modal -->
-  <div id="editModal" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="cerrarModal()">&times;</span>
-      <h3 class="text-center">Editar Producto</h3>
-      <div class="input-group mb-3 d-flex flex-column text-center">
-        <div class="form-floating">
-          <input class="form-control" type="text" id="editReferencia" placeholder="Referencia">
-          <label for="floatingInputGroup1">Referencia</label>
-        </div>
-        <div class="form-floating">
-          <input class="form-control" type="number" id="editCantidad" placeholder="Cantidad">
-          <label for="floatingInputGroup1">Cantidad</label>
-        </div>
-        <div class="form-floating">
-          <input class="form-control" type="number" id="editPrecio" placeholder="Precio">
-          <label for="floatingInputGroup1">Precio</label>
-        </div>
-        <select class="input-group-text mb-2" id="editTalla">
-          <option value="S">S</option>
-          <option value="M">M</option>
-          <option value="L">L</option>
-          <option value="XL">XL</option>
-          <option value="XXL">XXL</option>
-          <option value="3XL">3XL</option>
-          <option value="4XL">4XL</option>
-        </select>
+    <div class="row">
+      <div class="col-sm-3">
+        <h4>Total: $<span id="total">0</span></h4>
       </div>
-      <div class="d-flex align-self-center">
-        <button class="btn btn-success rounded" onclick="guardarEdicion()" style="width: 100%;">Guardar</button>
+      <div class="col-sm-9 d-flex justify-content-end">
+        <button class="btn btn-dark mx-3" onclick="window.print()">Imprimir</button>
+        <button class="btn btn-success mr-2">Guardar</button>
       </div>
     </div>
   </div>
 
+  <!-- Edit Modal -->
+  <div id="editModal" class="modal fade">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Editar Producto</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="input-group mb-3 d-flex flex-column text-center">
+              <div class="form-floating">
+                <input class="form-control" type="text" id="editReferencia" placeholder="Referencia">
+                <label for="floatingInputGroup1">Referencia</label>
+              </div>
+              <div class="form-floating">
+                <input class="form-control" type="number" id="editCantidad" placeholder="Cantidad">
+                <label for="floatingInputGroup1">Cantidad</label>
+              </div>
+              <div class="form-floating">
+                <input class="form-control" type="number" id="editPrecio" placeholder="Precio">
+                <label for="floatingInputGroup1">Precio</label>
+              </div>
+              <select class="input-group-text mb-2" id="editTalla">
+                <option value="S">S</option>
+                <option value="M">M</option>
+                <option value="L">L</option>
+                <option value="XL">XL</option>
+                <option value="XXL">XXL</option>
+                <option value="3XL">3XL</option>
+                <option value="4XL">4XL</option>
+              </select>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-success rounded" data-bs-dismiss="modal" onclick="guardarEdicion()" style="width: 100%;">Guardar</button>
+          </div>
+        </div>
+      </div>
+  </div>
+
   <!-- Observations Modal -->
-  <div id="observeModal" class="modal">
-    <div class="modal-dialog">
+  <div id="observeModal" class="modal fade">
+    <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
-        <span class="close" onclick="cerrarModalObservacion()">&times;</span>
-        <h3>Observaciones</h3>
-        <textarea id="observaciones" rows="4" style="width: 100%; margin: 10px 0;"></textarea>
-        <button class="btn btn-primary" onclick="guardarObservacion()">Guardar Observación</button>
+        <div class="modal-header">
+          <h5 class="modal-title">Observaciones</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <textarea id="observaciones" rows="4" style="width: 100%; margin: 10px 0;"></textarea>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-primary" data-bs-dismiss="modal" onclick="guardarObservacion()">Guardar Observación</button>
+        </div>
       </div>
     </div>
     
@@ -124,140 +143,26 @@
 
   <!-- Delete Modal -->
 
-  <div id="deleteModal" class="modal">
-    <div class="modal-content text-center">
-      <h3>¡Alerta!</h3>
-      <p>¿Estás seguro de eliminar este producto?</p>
-      <div class="d-flex justify-content-evenly ">
-        <button class="btn btn-dark" onclick="cerrarModaldelete()">Cancelar</button>
-        <button class="btn btn-delete"  onclick="eliminar()">Eliminar</button>
+  <div id="deleteModal" class="modal fade">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">¡Alerta!</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>¿Estás seguro de eliminar este producto?</p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Cancelar</button>
+            <button class="btn btn-delete" data-bs-dismiss="modal" onclick="eliminar()">Eliminar</button>
+        </div>
       </div>
     </div>
   </div>
 
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-  <script>
-    let carrito = [];
-    let indiceEdicion = -1;
-
-    function agregarProducto() {
-      const referencia = document.getElementById('referencia').value;
-      const cantidad = document.getElementById('cantidad').value;
-      const precio = document.getElementById('precio').value;
-      const talla = document.getElementById('talla').value;
-
-      const producto = { 
-        referencia, 
-        cantidad: parseInt(cantidad), 
-        precio: parseFloat(precio), 
-        talla,
-        observacion: ''
-      };
-      carrito.push(producto);
-      actualizarCarrito();
-      limpiarFormulario();
-    }
-
-    function limpiarFormulario() {
-      document.getElementById('referencia').value = '';
-      document.getElementById('cantidad').value = '';
-      document.getElementById('precio').value = '';
-      document.getElementById('talla').value = 'S';
-    }
-
-    function actualizarCarrito() {
-      const tbody = document.getElementById('carrito');
-      tbody.innerHTML = '';
-
-      let total = 0;
-      carrito.forEach((producto, index) => {
-        const subtotal = producto.cantidad * producto.precio;
-        total += subtotal;
-
-        const fila = `
-          <tr>
-            <td>${producto.referencia}</td>
-            <td>${producto.cantidad}</td>
-            <td>${producto.precio}</td>
-            <td>${producto.talla}</td>
-            <td>${subtotal.toFixed(2)}</td>
-            <td>
-              <button class="btn-action btn-delete" onclick="eliminarProducto(${index})">🗑️</button>
-              <button class="btn-action btn-edit" onclick="editarProducto(${index})">✏️</button>
-              <button class="btn-action btn-observe" onclick="observarProducto(${index})">📝</button>
-            </td>
-          </tr>
-        `;
-        tbody.innerHTML += fila;
-      });
-
-      document.getElementById('total').innerText = total.toFixed(2);
-    }
-
-    function eliminarProducto(index) {
-      document.getElementById('deleteModal').style.display = 'block';
-    }
-    
-    function cerrarModaldelete(){
-      document.getElementById('deleteModal').style.display = 'none';
-    }
-
-    function eliminar(index){
-      carrito.splice(index, 1);
-      actualizarCarrito();
-      cerrarModaldelete();
-    }
-
-    function editarProducto(index) {
-      indiceEdicion = index;
-      const producto = carrito[index];
-      
-      document.getElementById('editReferencia').value = producto.referencia;
-      document.getElementById('editCantidad').value = producto.cantidad;
-      document.getElementById('editPrecio').value = producto.precio;
-      document.getElementById('editTalla').value = producto.talla;
-      
-      document.getElementById('editModal').style.display = 'block';
-    }
-
-    function cerrarModal() {
-      document.getElementById('editModal').style.display = 'none';
-      indiceEdicion = -1;
-    }
-
-    function guardarEdicion() {
-      if(indiceEdicion === -1) return;
-      
-      carrito[indiceEdicion] = {
-        referencia: document.getElementById('editReferencia').value,
-        cantidad: parseInt(document.getElementById('editCantidad').value),
-        precio: parseFloat(document.getElementById('editPrecio').value),
-        talla: document.getElementById('editTalla').value,
-        observacion: carrito[indiceEdicion].observacion || ''
-      };
-      
-      actualizarCarrito();
-      cerrarModal();
-    }
-
-    function observarProducto(index) {
-      indiceEdicion = index;
-      document.getElementById('observaciones').value = carrito[index].observacion || '';
-      document.getElementById('observeModal').style.display = 'block';
-    }
-
-    function cerrarModalObservacion() {
-      document.getElementById('observeModal').style.display = 'none';
-      indiceEdicion = -1;
-    }
-
-    function guardarObservacion() {
-      if(indiceEdicion === -1) return;
-      
-      carrito[indiceEdicion].observacion = document.getElementById('observaciones').value;
-      cerrarModalObservacion();
-    }
-  </script>
+  <script src="assets/js/inventory.js"></script>
 </body>
 </html>
