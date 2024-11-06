@@ -1,3 +1,7 @@
+    //Tooltip Initializer
+    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+    const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+    
     // Declare Index Table & edit index
     let carrito = [];
     let indiceEdicion = -1;
@@ -6,9 +10,10 @@
 
     // Modals & Modal Triggers
 
-    const deleteModal = document.getElementById('deleteModal');
-    const editModal = document.getElementById('editModal');
-    const observeModal = document.getElementById('observeModal');
+    var delModal = new bootstrap.Modal(document.getElementById("deleteModal"));
+    var editModal = new bootstrap.Modal(document.getElementById("editModal"));
+    var observeModal = new bootstrap.Modal(document.getElementById("observeModal"));
+    var alertModal = new bootstrap.Modal(document.getElementById("alertModal"));
 
     // Index Table Functions
 
@@ -18,6 +23,56 @@
       const precio = document.getElementById('precio').value;
       const talla = document.getElementById('talla').value;
 
+      const campos = [
+        { value: referencia, name: 'Referencia' },
+        { value: cantidad, name: 'Cantidad' },
+        { value: precio, name: 'Precio' },
+        { value: talla, name: 'Talla' }
+      ];
+
+      // Alerts <p> on Modal
+      qAlert = document.getElementById('quantityalert');
+      pAlert = document.getElementById('pricealert');
+      bAlert = document.getElementById('blankalert');
+
+
+      // Form Comprobations
+      for(let campo of campos){
+        if(!campo.value.trim()){
+          bAlert.style.display = "block";
+
+          qAlert.style.display = "none";
+          pAlert.style.display = "none";
+
+          alertModal.show();
+          return;
+        }
+      }
+
+      // -- Data Validator --
+      
+      if(!/^\d{1,10}$/.test(cantidad)){
+        qAlert.style.display = "block";
+
+        pAlert.style.display = "none";
+        bAlert.style.display = "none";
+
+        alertModal.show();
+        return
+      }
+
+      if(!/^d[0-9]{20}$/){
+        pAlert.style.display = "block";
+
+        qAlert.style.display = "none";
+        bAlert.style.display = "none";
+
+        alertModal.show();
+        return;
+      }
+
+      // End
+      
       const producto = { 
         referencia, 
         cantidad: parseInt(cantidad), 
@@ -25,6 +80,7 @@
         talla,
         observacion: ''
       };
+
       carrito.push(producto);
       actualizarCarrito();
       limpiarFormulario();
@@ -37,6 +93,7 @@
       document.getElementById('talla').value = 'S';
     }
 
+    //Table Products updater
     function actualizarCarrito() {
       const tbody = document.getElementById('carrito');
       tbody.innerHTML = '';
@@ -54,9 +111,9 @@
             <td>${producto.talla}</td>
             <td>${subtotal.toFixed(2)}</td>
             <td>
-              <button class="btn-action btn-delete" data-bs-toggle="modal" data-bs-placement="top" data-bs-title="Eliminar" data-bs-target="#deleteModal">🗑️</button>
-              <button class="btn-action btn-edit" data-bs-toggle="modal" data-bs-target="#editModal" onclick="editarProducto(${index})">✏️</button>
-              <button class="btn-action btn-observe" data-bs-toggle="modal" data-bs-target="#observeModal" onclick="observarProducto(${index})">📝</button>
+              <button class="btn-action btn-delete" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Eliminar" data-bs-target="#deleteModal" id="btnDel">🗑️</button>
+              <button class="btn-action btn-edit" data-bs-toggle="tooltip" data-bs-target="#editModal" title="Editar" onclick="editarProducto(${index})" id="btnEdit">✏️</button>
+              <button class="btn-action btn-observe" data-bs-toggle="tooltip" data-bs-target="#observeModal" title="Observación" onclick="observarProducto(${index})" id="btnObs">📝</button>
             </td>
           </tr>
         `;
@@ -64,8 +121,13 @@
       });
 
       document.getElementById('total').innerText = total.toFixed(2);
+
+      //Tooltips Triggers re-initiliaze
+      const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+      const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
     }
 
+    // Edit and Observe Modal Functions
 
     function eliminar(index){
       carrito.splice(index, 1);
@@ -111,3 +173,29 @@
       carrito[indiceEdicion].observacion = document.getElementById('observaciones').value;
       cerrarModal();
     }
+
+    // Modal Shows and Close --
+
+    document.getElementById('carrito').addEventListener("click", function(event) {
+      // Verifica si el elemento clicado tiene la clase 'btn-delete'
+      if (event.target.classList.contains("btn-delete")) {
+          btndelModal = document.getElementById('btnDel');
+          delTooltip = bootstrap.Tooltip.getOrCreateInstance(btndelModal);
+          delTooltip.hide();
+          delModal.show();
+      }
+      // Verifica si el elemento clicado tiene la clase 'btn-edit'
+      else if (event.target.classList.contains("btn-edit")) {
+          btneditModal = document.getElementById('btnEdit');
+          editTooltip = bootstrap.Tooltip.getOrCreateInstance(btneditModal);
+          editTooltip.hide();
+          editModal.show();
+      }
+      // Verifica si el elemento clicado tiene la clase 'btn-observe'
+      else if (event.target.classList.contains("btn-observe")) {
+          btnobsModal = document.getElementById('btnObs');
+          obsTooltip = bootstrap.Tooltip.getOrCreateInstance(btnobsModal);
+          obsTooltip.hide();
+          observeModal.show();
+      }
+  });

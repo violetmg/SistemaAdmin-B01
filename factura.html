@@ -146,8 +146,8 @@
   <div id="deleteModal" class="modal fade">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">¡Alerta!</h5>
+        <div class="modal-header" style="background-color: #c23434;">
+          <h5 class="modal-title text-white">¡Alerta!</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -156,6 +156,27 @@
         <div class="modal-footer">
             <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Cancelar</button>
             <button class="btn btn-delete" data-bs-dismiss="modal" onclick="eliminar()">Eliminar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Alert Modal -->
+
+  <div id="alertModal" class="modal fade">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header" style="background-color: #c23434;">
+          <h5 class="modal-title text-white">¡Alerta!</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p id="blankalert">No se puede agregar el producto, rellene los campos.</p>
+          <p id="quantityalert">No se puede agregar el producto, error en cantidad.</p>
+          <p id="pricealert">No se puede agregar el producto, error en precio.</p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Aceptar</button>
         </div>
       </div>
     </div>

@@ -319,6 +319,10 @@ th {
     margin-bottom: 0.2rem;
   }
 
+  #editProfileModal .input-group .form-floating{
+    width: 100%;
+    margin-bottom: 0.2rem;
+  }
       
 
   .close {

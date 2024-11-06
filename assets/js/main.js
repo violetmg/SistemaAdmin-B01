@@ -1,6 +1,8 @@
 //Tooltip Initializer
-const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
-const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+  var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+    return new bootstrap.Tooltip(tooltipTriggerEl)
+  })
 
 //Login function
 function handleLogin(event) {
@@ -59,4 +61,28 @@ function exportarDatos() {
 
 
   // ... Modals Logic ... //
+
+  // Profile Edit //
+
+  var profname = document.getElementById('toeditNombre').innerHTML;
+  var email = document.getElementById('toeditEmail').innerHTML;
+  var contact = document.getElementById('toeditContact').innerHTML;
+
+  function editarUsuario(){
+    document.getElementById('editNombre').value = profname;
+    document.getElementById('editEmail').value = email;
+    document.getElementById('editContact').value = contact;
+
+  }
+
+  function guardarUsuario(){
+    
+  }
+
+  profileModal = new bootstrap.Modal(document.getElementById("editProfileModal"));
+
+  document.getElementById('btnProfileEdit').addEventListener("click", function(event){
+    editarUsuario();
+    profileModal.show();
+  });
 

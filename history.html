@@ -66,9 +66,9 @@
                                 <p class="mb-0">Nombre Completo</p> 
                             </div>
                             <div class="col-sm-8 d-flex">
-                                <p class="text-muted mb-0 mx-2">Example Name</p>
+                                <p class="text-muted mb-0 mx-2" id="toeditNombre">Example Name</p>
                             </div>
-                            <div class="col-sm-1">
+                            <div class="col-sm-1" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Editar" data-bs-target="#editProfileModal" id="btnProfileEdit">
                                 <span class="badge text-bg-primary">Editar
                                     <a class="fa-solid fa-pencil" id="edituser" style="color: #eee;"></a>
                                 </span>
@@ -80,7 +80,7 @@
                                 <p class="mb-0">Email</p>
                             </div>
                             <div class="col-sm-9 d-flex">
-                                <p class="text-muted mb-0 mx-2">Example Email</p>
+                                <p class="text-muted mb-0 mx-2" id="toeditEmail">Example Email</p>
                             </div>
                             <hr>
                         </div>
@@ -89,7 +89,7 @@
                                 <p class="mb-0">Contacto</p>
                             </div>
                             <div class="col-sm-9 d-flex">
-                                <p class="text-muted mb-0 mx-2">Example Contact</p>
+                                <p class="text-muted mb-0 mx-2" id="toeditContact">325 450 9053</p>
                             </div>
                             <hr>
                         </div>
@@ -148,10 +148,38 @@
         </div>
         
     </section>
-    
+    <div id="editProfileModal" class="modal fade">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Editar Producto</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="input-group mb-3 d-flex flex-column text-center">
+                <div class="form-floating">
+                  <input class="form-control" type="text" id="editNombre" placeholder="Nombre Completo">
+                  <label for="floatingInputGroup1">Nombre Completo</label>
+                </div>
+                <div class="form-floating">
+                  <input class="form-control" type="text" id="editEmail" placeholder="Email">
+                  <label for="floatingInputGroup1">Email</label>
+                </div>
+                <div class="form-floating">
+                  <input class="form-control" type="text" id="editContact" placeholder="Contacto">
+                  <label for="floatingInputGroup1">Contacto</label>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-success rounded" data-bs-dismiss="modal" onclick="guardarUsuario()" style="width: 100%;">Guardar</button>
+            </div>
+          </div>
+        </div>
+    </div>
     
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    
+    <script src="assets/js/main.js"></script>
 </body>
 </html>
