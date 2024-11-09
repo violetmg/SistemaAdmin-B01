@@ -64,19 +64,21 @@ function exportarDatos() {
 
   // Profile Edit //
 
-  var profname = document.getElementById('toeditNombre').innerHTML;
-  var email = document.getElementById('toeditEmail').innerHTML;
-  var contact = document.getElementById('toeditContact').innerHTML;
+  var profname = document.getElementById('toeditNombre');
+  var email = document.getElementById('toeditEmail');
+  var contact = document.getElementById('toeditContact');
 
   function editarUsuario(){
-    document.getElementById('editNombre').value = profname;
-    document.getElementById('editEmail').value = email;
-    document.getElementById('editContact').value = contact;
+    document.getElementById('editNombre').value = profname.innerHTML;
+    document.getElementById('editEmail').value = email.innerHTML;
+    document.getElementById('editContact').value = contact.innerHTML;
 
   }
 
   function guardarUsuario(){
-    
+    profname.innerHTML = document.getElementById('editNombre').value;
+    email.innerHTML = document.getElementById('editEmail').value;
+    contact.innerHTML = document.getElementById('editContact').value;
   }
 
   profileModal = new bootstrap.Modal(document.getElementById("editProfileModal"));
