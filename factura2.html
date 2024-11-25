@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Factura</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+}
+
+.invoice {
+    width: 80%;
+    margin: 20px auto;
+    background: #fff;
+    padding: 20px;
+    border: 1px solid #ddd;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 10px;
+}
+
+.company {
+    font-size: 14px;
+}
+
+.order-info {
+    font-size: 14px;
+    text-align: right;
+}
+
+.client-info, .payment-info {
+    margin: 20px 0;
+    font-size: 14px;
+}
+
+.field {
+    border-bottom: 1px dashed #000;
+    display: inline-block;
+    width: 200px;
+}
+
+.checkbox {
+    margin-left: 10px;
+    border: 1px solid #000;
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+}
+
+.product-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+.product-table th, .product-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+.product-table th {
+    background: #f5f5f5;
+}
+
+.footer {
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+    </style>
+</head>
+
+<body>
+    <div class="invoice">
+        <header class="header">
+            <div class="company">
+                <h1>AMERICAM BLACK MYLOR</h1>
+                <p>Cra 53 No. 48 - 15 Of. 901<br>Edificio Chine Center Medellín</p>
+                <p>Tel: 300 271 17 91 / 310 388 9506</p>
+            </div>
+            <div class="order-info">
+                <p><strong>Pedido Nº:</strong> 0980</p>
+                <p><strong>Fecha:</strong> ____/____/____</p>
+            </div>
+        </header>
+
+        <section class="client-info">
+            <p><strong>Razón Social:</strong> <span class="field">________________________</span></p>
+            <p><strong>Ciudad:</strong> <span class="field">________________________</span></p>
+            <p><strong>Vendedor:</strong> <span class="field">________________________</span></p>
+            <p><strong>Almacén:</strong> <span class="field">________________________</span></p>
+            <p><strong>Correo:</strong> <span class="field">________________________</span></p>
+            <p><strong>Teléfono:</strong> <span class="field">________________________</span></p>
+        </section>
+
+        <section class="payment-info">
+            <p><strong>Forma de Pago:</strong>
+                <span class="checkbox">☐</span> Contado
+                <span class="checkbox">☐</span> Crédito
+                <span class="checkbox">☐</span> Plazo
+            </p>
+        </section>
+
+        <table class="product-table">
+            <thead>
+                <tr>
+                    <th>Ref</th>
+                    <th>Cant.</th>
+                    <th>Descripción</th>
+                    <th>S</th>
+                    <th>M</th>
+                    <th>L</th>
+                    <th>XL</th>
+                    <th>2XL</th>
+                    <th>3XL</th>
+                    <th>4XL</th>
+                    <th>V/Unitario</th>
+                    <th>V/Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="field">BL11</span></td>
+                    <td><span class="field">6</span></td>
+                    <td><span class="field">________________</span></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><span class="field">31900</span></td>
+                    <td><span class="field">________________</span></td>
+                </tr>
+                <!-- Agregar más filas si es necesario -->
+            </tbody>
+        </table>
+
+        <section class="footer">
+            <p><strong>Observaciones:</strong> <span class="field">______________________________</span></p>
+            <p>Firma y Sello del Cliente</p>
+        </section>
+    </div>
+</body>
+
+</html>
