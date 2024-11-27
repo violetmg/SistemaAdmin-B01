@@ -176,26 +176,68 @@
 
     // Modal Shows and Close --
 
-    document.getElementById('carrito').addEventListener("click", function(event) {
-      // Verifica si el elemento clicado tiene la clase 'btn-delete'
-      if (event.target.classList.contains("btn-delete")) {
-          btndelModal = document.getElementById('btnDel');
-          delTooltip = bootstrap.Tooltip.getOrCreateInstance(btndelModal);
-          delTooltip.hide();
-          delModal.show();
-      }
-      // Verifica si el elemento clicado tiene la clase 'btn-edit'
-      else if (event.target.classList.contains("btn-edit")) {
-          btneditModal = document.getElementById('btnEdit');
-          editTooltip = bootstrap.Tooltip.getOrCreateInstance(btneditModal);
-          editTooltip.hide();
-          editModal.show();
-      }
-      // Verifica si el elemento clicado tiene la clase 'btn-observe'
-      else if (event.target.classList.contains("btn-observe")) {
-          btnobsModal = document.getElementById('btnObs');
-          obsTooltip = bootstrap.Tooltip.getOrCreateInstance(btnobsModal);
-          obsTooltip.hide();
-          observeModal.show();
-      }
+  document.getElementById('carrito').addEventListener("click", function(event) {
+    // Verifica si el elemento clicado tiene la clase 'btn-delete'
+    if (event.target.classList.contains("btn-delete")) {
+        btndelModal = document.getElementById('btnDel');
+        delTooltip = bootstrap.Tooltip.getOrCreateInstance(btndelModal);
+        delTooltip.hide();
+        delModal.show();
+    }
+    // Verifica si el elemento clicado tiene la clase 'btn-edit'
+    else if (event.target.classList.contains("btn-edit")) {
+        btneditModal = document.getElementById('btnEdit');
+        editTooltip = bootstrap.Tooltip.getOrCreateInstance(btneditModal);
+        editTooltip.hide();
+        editModal.show();
+    }
+    // Verifica si el elemento clicado tiene la clase 'btn-observe'
+    else if (event.target.classList.contains("btn-observe")) {
+        btnobsModal = document.getElementById('btnObs');
+        obsTooltip = bootstrap.Tooltip.getOrCreateInstance(btnobsModal);
+        obsTooltip.hide();
+        observeModal.show();
+    }
   });
+  
+async function guardarFactura() {
+
+  const request = {
+    user_Id: 1,
+    total: document.getElementById('total').textContent,
+    razonSocial: document.getElementById('razonSocial').value,
+    ciudad: document.getElementById('razonSocial').value,
+    billDetails: 
+      carrito.map((item) => {
+        return ({
+          id_Bill: 0,
+          referencia: item.referencia,
+          cantidad: item.cantidad,
+          descripcion: item.observacion,
+          talla: item.talla,
+          valorUnitario: item.precio
+        })
+      })
+    
+  }
+
+   try {
+      // Hacer la solicitud POST a la API
+      const response = await fetch('https://localhost:7187/api/invoice', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(request)
+      });
+
+      // Verificar si la respuesta fue exitosa
+     if (response.ok) {
+       // Si el inicio de sesión es exitoso, redirigir o almacenar el token
+       const data = await response.json()
+       console.log("se guardo con exito")
+     }   
+  } catch (error) {
+    console.log(error)
+  }
+}

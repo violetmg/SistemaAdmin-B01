@@ -129,11 +129,17 @@ function exportarDatos() {
                     nuevaFila.appendChild(celdaUltimoIngreso);
 
                     const celdaEstado = document.createElement("td");
-                    const estadoSpan = document.createElement("span");
+                  const estadoSpan = document.createElement("span");
+                  const boton = document.createElement('button');
+                  boton.textContent = 'Ver Detalles';
+                  boton.onclick = function() {
+                    mostrarModal(factura.facturaId);
+                  };
                     estadoSpan.classList.add("status-badge");
                     estadoSpan.classList.add(factura.Total < 100 ? "status-pending" : "status-completed");
                     estadoSpan.textContent = factura.Total < 100 ? "Stock Bajo" : "OK";
-                    celdaEstado.appendChild(estadoSpan);
+                
+                  celdaEstado.appendChild(boton);
                     nuevaFila.appendChild(celdaEstado);
 
                     // Agregar la fila a la tabla
@@ -156,5 +162,71 @@ function ValidarAdministrador() {
     } else {
       console.log('No se ha encontrado el token de autenticación.');
     }
-  }
+}
+  
+async function mostrarModal(facturaId) {
+  var detalles = await consultarDetalle(facturaId)
+  crearTablaDetalle(detalles)
+  document.getElementById('miModal').style.display = 'block';
+}
 
+// Función para cerrar el modal
+function cerrarModal() {
+  document.getElementById('miModal').style.display = 'none';
+}
+
+async function consultarDetalle(facturaId) {
+  try {
+    // Hacer la solicitud POST a la API
+      const response = await fetch(`https://localhost:7187/api/invoice/${facturaId}`, {
+          method: 'GET',
+          headers: {
+     
+          }
+      });
+
+      // Verificar si la respuesta fue exitosa
+     if (response.ok) {
+       // Si el inicio de sesión es exitoso, redirigir o almacenar el token
+       return await response.json()
+    
+     }   
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+function crearTablaDetalle(detalles) {
+  const tbody = document.getElementById('carrito');
+      tbody.innerHTML = '';
+
+      let total = 0;
+      detalles.forEach((detalle) => {
+        const subtotal =  detalle.amount *detalle.unit_Value;
+        total += subtotal;
+
+        const fila = `
+          <tr>
+            <td>${detalle.description}</td>
+            <td>${detalle.amount}</td>
+            <td>${detalle.unit_Value}</td>
+            <td>${detalle.size}</td>
+           
+            <td>
+              ${subtotal}
+            </td>
+               <td>
+             
+            </td>
+            
+          </tr>
+        `;
+        tbody.innerHTML += fila;
+      });
+
+      // document.getElementById('total').innerText = total.toFixed(2);
+
+      //Tooltips Triggers re-initiliaze
+      const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+      const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+}
